@@ -80,8 +80,10 @@ def send_telegram_photo(photo_id, caption):
 
 
 def get_item_details(item_id):
-    headers = {'accept': 'application/json', }
-    params = {'api_key': JELLYFIN_API_KEY, }
+    headers = {
+        'accept': 'application/json',
+        'Authorization': f'MediaBrowser Token="{JELLYFIN_API_KEY}"'
+    }
     url = f"{JELLYFIN_BASE_URL}/Items?Recursive=true&Fields=DateCreated,Overview&Ids={item_id}"
     response = requests.get(url, headers=headers, params=params)
     response.raise_for_status()  # Check if request was successful
