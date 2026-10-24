@@ -154,6 +154,43 @@ def announce_new_releases_from_jellyfin():
         season_epi = payload.get("EpisodeNumber00")
         season_num = payload.get("SeasonNumber00")
 
+        if item_type == "Series":
+            if not item_already_notified(item_type, item_name, release_year):
+                series_id = payload.get("ItemId")
+                overview = payload.get("Overview") or "Keine Beschreibung verfügbar."
+                series_name = item_name or "Unbekannte Serie"
+
+                if release_year:
+                    series_name = series_name.replace(
+                        f" ({release_year})", ""
+                    ).strip()
+                    title = f"*{series_name}* *({release_year})*"
+                else:
+                    title = f"*{series_name}*"
+
+                notification_message = (
+                    f"*📺 Neue Serie hinzugefügt 📺*\n\n"
+                    f"{title}\n\n{overview}"
+                )
+
+                response = send_telegram_photo(
+                    series_id, notification_message
+                )
+
+                if response.status_code == 200:
+                    mark_item_as_notified(
+                        item_type, item_name, release_year
+                    )
+                    logging.info(
+                        f"(Series) {series_name} notification sent to Telegram."
+                    )
+                    return "Series notification was sent to telegram"
+                else:
+                    logging.error(
+                        f"Telegram series notification failed: "
+                        f"{response.status_code} {response.text}"
+                    )
+        
         if item_type == "Movie":
             if not item_already_notified(item_type, item_name, release_year):
                 movie_id = payload.get("ItemId")
