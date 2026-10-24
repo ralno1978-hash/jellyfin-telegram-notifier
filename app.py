@@ -85,7 +85,7 @@ def get_item_details(item_id):
         'Authorization': f'MediaBrowser Token="{JELLYFIN_API_KEY}"'
     }
     url = f"{JELLYFIN_BASE_URL}/Items?Recursive=true&Fields=DateCreated,Overview&Ids={item_id}"
-    response = requests.get(url, headers=headers, params=params)
+    response = requests.get(url, headers=headers)
     response.raise_for_status()  # Check if request was successful
     return response.json()
 
