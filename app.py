@@ -203,7 +203,7 @@ def announce_new_releases_from_jellyfin():
                 trailer_url = get_youtube_trailer_url(f"{movie_name_cleaned} Trailer {release_year}")
 
                 notification_message = (
-                    f"*🍿New Movie Added🍿*\n\n*{movie_name_cleaned}* *({release_year})*\n\n{overview}\n\n"
+                    f"*🍿NEUEN FILM HINZUGEFÜGT🍿*\n\n*{movie_name_cleaned}* *({release_year})*\n\n{overview}\n\n"
                     f"Runtime\n{runtime}")
 
                 if trailer_url:
@@ -230,7 +230,7 @@ def announce_new_releases_from_jellyfin():
                     "Overview")
 
                 notification_message = (
-                    f"*New Season Added*\n\n*{series_name_cleaned}* *({release_year})*\n\n"
+                    f"*NEUE STAFFEL HINZUGEFÜGT*\n\n*{series_name_cleaned}* *({release_year})*\n\n"
                     f"*{season}*\n\n{overview_to_use}\n\n")
 
                 response = send_telegram_photo(season_id, notification_message)
@@ -270,7 +270,7 @@ def announce_new_releases_from_jellyfin():
                                                                    EPISODE_PREMIERED_WITHIN_X_DAYS):
 
                     notification_message = (
-                        f"*New Episode Added*\n\n*Release Date*: {episode_premiere_date}\n\n*Series*: {series_name} *S*"
+                        f"*NEUE EPISODE HINZUGEFÜGT*\n\n*Release Date*: {episode_premiere_date}\n\n*Series*: {series_name} *S*"
                         f"{season_num}*E*{season_epi}\n*Episode Title*: {epi_name}\n\n{overview}\n\n"
                     )
                     response = send_telegram_photo(season_id, notification_message)
