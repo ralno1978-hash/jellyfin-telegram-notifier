@@ -203,7 +203,7 @@ def announce_new_releases_from_jellyfin():
                 trailer_url = get_youtube_trailer_url(f"{movie_name_cleaned} Trailer {release_year}")
 
                 notification_message = (
-                    f"*🍿NEUEN FILM HINZUGEFÜGT🍿*\n\n*{movie_name_cleaned}* *({release_year})*\n\n{overview}\n\n"
+                    f"*🍿NEU HINZUGEFÜGT🍿*\n\n*{movie_name_cleaned}* *({release_year})*\n\n{overview}\n\n"
                     f"Runtime\n{runtime}")
 
                 if trailer_url:
